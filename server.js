@@ -1,18 +1,17 @@
-//const SteamAPI = require('steamapi');
-//const dotenv = require('dotenv');
-//const cors = require('cors');
-//const path = require('path');
+const SteamAPI = require('steamapi');
+const dotenv = require('dotenv');
+const cors = require('cors');
 var express = require('express');
 const serverless = require('serverless-http');
 
-//dotenv.config();
-//const steam = new SteamAPI(process.env.API_KEY);
+dotenv.config();
+const steam = new SteamAPI(process.env.API_KEY);
 let PORT = process.env.PORT || 5000;
 let app = express();
 
-//router.use(cors());
+app.use(cors());
 
-/*router.get('/get-games', (req, res) => {
+app.get('/get-games', (req, res) => {
   console.log('GET GAMES CALLED!');
   steam
     .resolve(req.query.id.toString())
@@ -26,7 +25,7 @@ let app = express();
         .catch((err) => console.log(err));
     })
     .catch((err) => console.log(err));
-});*/
+});
 
 app.get('/', (req, res) => {
   res.send('Hello world');
