@@ -7,7 +7,7 @@ const serverless = require('serverless-http');
 
 //dotenv.config();
 //const steam = new SteamAPI(process.env.API_KEY);
-var PORT = process.env.PORT || 5000;
+let PORT = process.env.PORT || 5000;
 let app = express();
 const router = express.Router();
 
@@ -30,11 +30,7 @@ const router = express.Router();
 });*/
 
 router.get('/', (req, res) => {
-  //res.sendFile(path.join(__dirname, '../my-app/build/index.html'));
-
-  res.json({
-    hello: 'hi',
-  });
+  res.send('Hello world');
 });
 
 app.listen(PORT, () => {
