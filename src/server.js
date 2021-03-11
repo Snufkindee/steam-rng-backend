@@ -32,7 +32,11 @@ router.get('/get-games', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../my-app/build/index.html'));
+  //res.sendFile(path.join(__dirname, '../my-app/build/index.html'));
+
+  res.json({
+    hello: 'hi',
+  });
 });
 
 app.listen(port, () => {
