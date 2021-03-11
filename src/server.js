@@ -3,16 +3,19 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require('path');
 var express = require('express');
+const serverless = require('serverless-http');
 
 dotenv.config();
 const steam = new SteamAPI(process.env.API_KEY);
 
 let port = process.env.PORT || 4000;
 let app = express();
-app.use(cors());
-app.use(express.static(path.join(__dirname, 'my-app/build')));
+const router = express.Router();
 
-app.get('/api/get-games', (req, res) => {
+router.use(cors());
+router.use(express.static(path.join(__dirname, 'my-app/build')));
+
+router.get('/get-games', (req, res) => {
   console.log('GET GAMES CALLED!');
   steam
     .resolve(req.query.id.toString())
@@ -28,10 +31,14 @@ app.get('/api/get-games', (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../my-app/build/index.html'));
 });
 
 app.listen(port, () => {
   console.log(`Server listening on the port::${port}`);
 });
+
+app.use('/.netlify/functions/api', router);
+
+module.exports.handler = serverless(app);
