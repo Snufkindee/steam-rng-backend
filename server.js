@@ -9,7 +9,6 @@ const serverless = require('serverless-http');
 //const steam = new SteamAPI(process.env.API_KEY);
 let PORT = process.env.PORT || 5000;
 let app = express();
-const router = express.Router();
 
 //router.use(cors());
 
@@ -29,14 +28,12 @@ const router = express.Router();
     .catch((err) => console.log(err));
 });*/
 
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Hello world');
 });
 
 app.listen(PORT, () => {
   console.log(`Server listening on the port::${PORT}`);
 });
-
-app.use('/.netlify/functions/api', router);
 
 module.exports.handler = serverless(app);
