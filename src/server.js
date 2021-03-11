@@ -1,21 +1,19 @@
-const SteamAPI = require('steamapi');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const path = require('path');
+//const SteamAPI = require('steamapi');
+//const dotenv = require('dotenv');
+//const cors = require('cors');
+//const path = require('path');
 var express = require('express');
 const serverless = require('serverless-http');
 
-dotenv.config();
-const steam = new SteamAPI(process.env.API_KEY);
+//dotenv.config();
+//const steam = new SteamAPI(process.env.API_KEY);
 
-let port = process.env.PORT || 4000;
 let app = express();
 const router = express.Router();
 
-router.use(cors());
-router.use(express.static(path.join(__dirname, 'my-app/build')));
+//router.use(cors());
 
-router.get('/get-games', (req, res) => {
+/*router.get('/get-games', (req, res) => {
   console.log('GET GAMES CALLED!');
   steam
     .resolve(req.query.id.toString())
@@ -29,7 +27,7 @@ router.get('/get-games', (req, res) => {
         .catch((err) => console.log(err));
     })
     .catch((err) => console.log(err));
-});
+});*/
 
 router.get('/', (req, res) => {
   //res.sendFile(path.join(__dirname, '../my-app/build/index.html'));
@@ -39,9 +37,9 @@ router.get('/', (req, res) => {
   });
 });
 
-app.listen(port, () => {
+/*app.listen(port, () => {
   console.log(`Server listening on the port::${port}`);
-});
+});*/
 
 app.use('/.netlify/functions/api', router);
 
