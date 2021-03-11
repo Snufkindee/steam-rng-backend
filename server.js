@@ -11,7 +11,7 @@ let app = express();
 
 app.use(cors());
 
-app.get('api/get-games', (req, res) => {
+app.get('/api/get-games', (req, res) => {
   steam
     .resolve(req.query.id.toString())
     .then((id) => {
