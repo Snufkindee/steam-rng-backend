@@ -7,7 +7,7 @@ const serverless = require('serverless-http');
 
 //dotenv.config();
 //const steam = new SteamAPI(process.env.API_KEY);
-
+var PORT = process.env.PORT || 5000;
 let app = express();
 const router = express.Router();
 
@@ -37,9 +37,9 @@ router.get('/', (req, res) => {
   });
 });
 
-/*app.listen(port, () => {
-  console.log(`Server listening on the port::${port}`);
-});*/
+app.listen(PORT, () => {
+  console.log(`Server listening on the port::${PORT}`);
+});
 
 app.use('/.netlify/functions/api', router);
 
